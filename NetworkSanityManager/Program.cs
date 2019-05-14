@@ -55,6 +55,27 @@ namespace NetworkSanityManager
                 }
             }
 
+            if (_config.Settings.Plugins.Contains("librenms") && !pluginBlocked)
+            {
+                var libre = new LibreNMS.Plugin(
+                    DeviceResults
+                    .Where((dev) => dev.SysNameValid)
+                    .Select<Device, LibreNMS.LibreNMSInputModel>((dev) =>
+                     new LibreNMS.LibreNMSInputModel
+                     {
+                         hostname = $"{dev.Name}.{_config.Settings.DomainName}",
+                         community = dev.Community
+                     }
+                    ));
+
+                Console.WriteLine("LibreNMS Preview:");
+                Console.WriteLine(libre.Preview());
+
+                Console.ReadLine();
+                Console.WriteLine("LibreNMS Commit: ");
+                Console.WriteLine("\n" + libre.Commit());
+            }
+
             if (_config.Settings.Plugins.Contains("oxidized") && !pluginBlocked)
             {
                 var oxi = new Oxidized.Plugin(
@@ -63,7 +84,7 @@ namespace NetworkSanityManager
                     .Select<Device, Oxidized.OxidizedInputModel>((dev) =>
                         new Oxidized.OxidizedInputModel
                         {
-                            Name = dev.Name,
+                            Name = $"{dev.Name}.{_config.Settings.DomainName}",
                             Address = dev.IpAddress.ToString(),
                             Vendor = dev.Vendor,
                             Model = dev.Model
@@ -71,6 +92,8 @@ namespace NetworkSanityManager
 
                 Console.WriteLine("Oxidized Preview: ");
                 Console.WriteLine(oxi.Preview());
+
+                Console.ReadLine();
                 Console.WriteLine("Oxidized Commit: ");
                 Console.WriteLine("\n" + oxi.Commit());
             }
@@ -85,6 +108,8 @@ namespace NetworkSanityManager
 
                 Console.WriteLine("Prometheus Preview: ");
                 Console.WriteLine(prom.Preview());
+
+                Console.ReadLine();
                 Console.WriteLine("Prometheus Commit: ");
                 Console.WriteLine("\n" + prom.Commit());
             }

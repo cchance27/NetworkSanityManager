@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.Oxidiz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.Prometheus", "NetworkSanityManager.Prometheus\NetworkSanityManager.Prometheus.csproj", "{394C14C1-4BC7-42BE-8176-7AF67769C20E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSanityManager.Tools", "NetworkSanityManager.Tools\NetworkSanityManager.Tools.csproj", "{3C1C74F6-F86F-4525-B864-16F13F71530D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.Tools", "NetworkSanityManager.Tools\NetworkSanityManager.Tools.csproj", "{3C1C74F6-F86F-4525-B864-16F13F71530D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSanityManager.MicrosoftDNS", "NetworkSanityManager.MicrosoftDNS\NetworkSanityManager.MicrosoftDNS.csproj", "{C918A894-5C36-4007-82FC-816B334A765F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.MicrosoftDNS", "NetworkSanityManager.MicrosoftDNS\NetworkSanityManager.MicrosoftDNS.csproj", "{C918A894-5C36-4007-82FC-816B334A765F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSanityManager.LibreNMS", "NetworkSanityManager.LibreNMS\NetworkSanityManager.LibreNMS.csproj", "{6E5A7CA3-A8B4-4031-9D9D-FCC30E36044C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C918A894-5C36-4007-82FC-816B334A765F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C918A894-5C36-4007-82FC-816B334A765F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C918A894-5C36-4007-82FC-816B334A765F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E5A7CA3-A8B4-4031-9D9D-FCC30E36044C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E5A7CA3-A8B4-4031-9D9D-FCC30E36044C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E5A7CA3-A8B4-4031-9D9D-FCC30E36044C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E5A7CA3-A8B4-4031-9D9D-FCC30E36044C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

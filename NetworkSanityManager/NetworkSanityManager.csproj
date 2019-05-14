@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NetworkSanityManager.LibreNMS\NetworkSanityManager.LibreNMS.csproj" />
     <ProjectReference Include="..\NetworkSanityManager.MicrosoftDNS\NetworkSanityManager.MicrosoftDNS.csproj" />
     <ProjectReference Include="..\NetworkSanityManager.Oxidized\NetworkSanityManager.Oxidized.csproj" />
     <ProjectReference Include="..\NetworkSanityManager.Prometheus\NetworkSanityManager.Prometheus.csproj" />

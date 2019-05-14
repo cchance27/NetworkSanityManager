@@ -42,7 +42,7 @@ namespace NetworkSanityManager
         public string Errors { get; set; }
 
         private DeviceType _deviceType { get; set; }
-        private string _community { get; }
+        public string Community { get; }
 
         public Device() { }
 
@@ -56,7 +56,7 @@ namespace NetworkSanityManager
             Contact = contact;
             Name = name.ToLower();
             Location = location;
-            _community = community;
+            Community = community;
 
             // Find and store what kind of device this is so we can use it later.
             _deviceType = _config.DeviceTypes.SingleOrDefault<DeviceType>(dt => ObjectOID.Contains(dt.ObjectOID));

@@ -1,0 +1,7 @@
+﻿{
+  "Settings": {
+    "enabled": false,
+    "url": "http://librenms.localdomain/api/v0/",
+    "key": "00000000000000000000000000000000000"
+  }
+}
