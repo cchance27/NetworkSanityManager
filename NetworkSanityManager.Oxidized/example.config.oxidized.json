@@ -1,0 +1,74 @@
+﻿{
+  "Settings": {
+    "enabled": false,
+    "filePath": "/root/oxidized/router.db",
+    "reloadAPI": "http://oxidized.localdomain/reload?format=json",
+    "server": "oxidized.localdomain",
+    "scpUsername": "root",
+    "scpPassword": "password",
+    "scpCertFile": null,
+    "scpCertFilePassword": null,
+    "debug": true
+  },
+  "Devices": [
+    {
+      "Vendor": "Extreme Networks",
+      "ModelRegex": "^EAS .*",
+      "Type": "dlink",
+      "Username": "admin",
+      "Password": "password",
+      "Comment": "These are the EAS Switches that are actually dlink boxes OEM'd to Extreme"
+    },
+    {
+      "Vendor": "Extreme Networks",
+      "ModelRegex": "^X[\\d]{3}.*",
+      "Type": "xos",
+      "Username": "admin",
+      "Password": "password",
+      "Comment": "X450-24p"
+    },
+    {
+      "Vendor": "Extreme Networks",
+      "ModelRegex": "^E4G-[\\d]{3}.*",
+      "Type": "xos",
+      "Username": "admin",
+      "Password": "password",
+      "Comment":  "E4G-200"
+    },
+    {
+      "Vendor": "Cisco",
+      "ModelRegex": null,
+      "Type": "iosxr",
+      "Username": "admin",
+      "Password": "password"
+    },
+    {
+      "Vendor": "Mikrotik",
+      "ModelRegex": null,
+      "Type": "routeros",
+      "Username": "admin",
+      "Password": "password"
+    },
+    {
+      "Vendor": "Ubiquiti",
+      "ModelRegex": "Edge.*Switch.*",
+      "Type": "edgeswitch",
+      "Username": "admin",
+      "Password": "password"
+    },
+    {
+      "Vendor": "Ubiquiti",
+      "ModelRegex": "AirFiber",
+      "Type": "airfiber",
+      "Username": "admin",
+      "Password": "password"
+    },
+    {
+      "Vendor": "Cambium",
+      "ModelRegex": ".*MIMO OFDM - Multipoint.*",
+      "Type": "cambium",
+      "Username": "admin",
+      "Password": "password"
+    }
+  ]
+}

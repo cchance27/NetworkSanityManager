@@ -1,0 +1,34 @@
+﻿{
+  "Settings": {
+    "enabled": false,
+    "targetFolderPath": "/opt/prometheus/targets/",
+    "server": "127.0.0.1",
+    "username": "root",
+    "password": "password",
+    "certFile": null,
+    "certFilePassword": null,
+    "debug": true
+  },
+  "Devices": [
+    {
+      "Vendor": "Extreme Networks",
+      "TargetFilename": "switches.yml"
+    },
+    {
+      "Vendor": "Cisco",
+      "TargetFilename": "cisco.yml"
+    },
+    {
+      "Vendor": "Ceragon",
+      "TargetFilename": "ceragon.yml"
+    },
+    {
+      "Vendor": "Mimosa",
+      "TargetFilename": "mimosa.yml"
+    },
+    {
+      "Vendor": "AirFiber",
+      "TargetFilename": "airfibers.yml"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="config.oxidized.json" />
+    <None Remove="example.config.oxidized.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="example.config.oxidized.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config.oxidized.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.extensions.configuration" Version="2.2.0" />
+    <PackageReference Include="microsoft.extensions.configuration.binder" Version="2.2.0" />
+    <PackageReference Include="microsoft.extensions.configuration.json" Version="2.2.0" />
+    <PackageReference Include="SSH.NET.Fork" Version="2018.8.25.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkSanityManager.Tools\NetworkSanityManager.Tools.csproj" />
+  </ItemGroup>
+
+</Project>

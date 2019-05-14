@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager", "NetworkSanityManager\NetworkSanityManager.csproj", "{B05FCF10-E8AC-4762-BA08-2B546B2EE11D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.Oxidized", "NetworkSanityManager.Oxidized\NetworkSanityManager.Oxidized.csproj", "{C537D658-B60B-4B06-8407-EB664321BF0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkSanityManager.Prometheus", "NetworkSanityManager.Prometheus\NetworkSanityManager.Prometheus.csproj", "{394C14C1-4BC7-42BE-8176-7AF67769C20E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSanityManager.Tools", "NetworkSanityManager.Tools\NetworkSanityManager.Tools.csproj", "{3C1C74F6-F86F-4525-B864-16F13F71530D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkSanityManager.MicrosoftDNS", "NetworkSanityManager.MicrosoftDNS\NetworkSanityManager.MicrosoftDNS.csproj", "{C918A894-5C36-4007-82FC-816B334A765F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B05FCF10-E8AC-4762-BA08-2B546B2EE11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05FCF10-E8AC-4762-BA08-2B546B2EE11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05FCF10-E8AC-4762-BA08-2B546B2EE11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05FCF10-E8AC-4762-BA08-2B546B2EE11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C537D658-B60B-4B06-8407-EB664321BF0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C537D658-B60B-4B06-8407-EB664321BF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C537D658-B60B-4B06-8407-EB664321BF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C537D658-B60B-4B06-8407-EB664321BF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{394C14C1-4BC7-42BE-8176-7AF67769C20E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{394C14C1-4BC7-42BE-8176-7AF67769C20E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{394C14C1-4BC7-42BE-8176-7AF67769C20E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{394C14C1-4BC7-42BE-8176-7AF67769C20E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1C74F6-F86F-4525-B864-16F13F71530D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1C74F6-F86F-4525-B864-16F13F71530D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1C74F6-F86F-4525-B864-16F13F71530D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1C74F6-F86F-4525-B864-16F13F71530D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C918A894-5C36-4007-82FC-816B334A765F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C918A894-5C36-4007-82FC-816B334A765F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C918A894-5C36-4007-82FC-816B334A765F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C918A894-5C36-4007-82FC-816B334A765F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A55B8D2B-03E4-46A2-A03A-7F453DA1DF7C}
+	EndGlobalSection
+EndGlobal

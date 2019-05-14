@@ -1,0 +1,10 @@
+﻿{
+  "Settings": {
+    "enabled": false,
+    "server": "127.0.0.1",
+    "domain": "localdomain",
+    "domainPrefix": "device",
+    "username": "administrator",
+    "password": "password"
+  }
+}

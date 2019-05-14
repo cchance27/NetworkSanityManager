@@ -1,0 +1,228 @@
+﻿{
+  "Settings": {
+    "Subnets": [
+      {
+        "Subnet": "172.16.0.0/24",
+        "Community": "public"
+      }
+    ],
+    "Plugins": [ "microsoftdns", "oxidized", "prometheus" ],
+    "DomainName": "device.localdomain",
+    "SysNameValidator": "^(DEVPREFIX)\\w{5,}-",
+    "Threads": 20,
+    "SnmpRetries": 1,
+    "SnmpV1Fallback": true
+  },
+  "Devices": [
+    {
+      "Vendor": "Extreme Networks",
+      "Type": "Switch",
+      "ObjectOID": "1.3.6.1.4.1.1916.2",
+      "ModelChecks": [
+        {
+          "Check": "ExtremeXOS version 12.*",
+          "ModelFixed": "X000 ExtremeXOS pre-15.x",
+          "VersionRegex": "ExtremeXOS version (?<Version>.*?) by",
+          "Example": "ExtremeXOS version 12.6.1.3 v1261b3 by release-manager on Thu Jul 21 09:46:07 PDT 2011",
+          "Note": "Model not Provided in SNMP"
+        },
+        {
+          "Check": "ExtremeXOS.*",
+          "Regex": ".*\\((?<Model>.*?)\\) version (?<Version>.*?) by",
+          "Example": "ExtremeXOS (X450a-48t) version 15.3.1.4 v1531b4-patch1-3 by release-manager on Sun Mar 17 03:12:24 EDT 2013"
+        },
+        {
+          "Check": "EAS.*",
+          "ModelRegex": "(?<Model>.*?) Gigabit",
+          "Example": "EAS 200-24p Gigabit Ethernet Switch"
+        }
+      ]
+    },
+    {
+      "Vendor": "Cisco",
+      "Type": "Router",
+      "ObjectOID": "1.3.6.1.4.1.9.1.1639",
+      "ModelChecks": [
+        {
+          "Check": "Cisco IOS XR Software.*",
+          "Regex": "\\((?<Model>.*?)\\),.*?Version (?<Version>.*?)\\[",
+          "Example": "Cisco IOS XR Software (Cisco ASR9K Series),  Version 6.2.25[Default]\nCopyright (c) 2017 by Cisco Systems, Inc."
+        }
+      ]
+    },
+    {
+      "Vendor": "Ceragon",
+      "Type": "Wireless PTP",
+      "ObjectOID": "1.3.6.1.4.1.2281",
+      "ModelChecks": [
+        {
+          "Check": "IP-20.*",
+          "ModelRegex": "(?<Model>.*?) ",
+          "VersionSnmp": "1.3.6.1.4.1.2281.10.4.1.13.1.1.4.1",
+          "Example": "IP-20G 1RU, 2 radio, 6 GbE, 16 TDM, dual feed",
+          "Note": "Version not provided in sysVersion"
+        },
+        {
+          "Check": "High capacity packet radio outdoor unit",
+          "ModelSnmp": "1.3.6.1.4.1.2281.10.1.2.10.1.1.2.127",
+          "VersionSnmp": "1.3.6.1.4.1.2281.10.4.1.13.1.1.4.1",
+          "Example": "High capacity packet radio outdoor unit",
+          "Note": "Doesn't Provide Anything useful?!?!"
+        }
+      ]
+    },
+    {
+      "Vendor": "Mimosa",
+      "Type": "Wireless PTP",
+      "ObjectOID": "1.3.6.1.4.1.43356",
+      "ModelChecks": [
+        {
+          "Check": "Mimosa \\S+ Firmware \\S+",
+          "ModelRegex": "Mimosa (?<Model>\\S+) Firmware.*",
+          "VersionSnmp": "1.3.6.1.4.1.43356.2.1.2.1.3.0",
+          "Example": "Mimosa B5c Firmware v9c4023a"
+        },
+        {
+          "Check": "Mimosa Firmware",
+          "ModelFixed": "Mimosa",
+          "VersionSnmp": "1.3.6.1.4.1.43356.2.1.2.1.3.0",
+          "Example": "Mimosa Firmware"
+        }
+      ]
+    },
+    {
+      "Vendor": "Ubiquiti",
+      "Type": "Wireless PTP",
+      "ObjectOID": "1.3.6.1.4.1.10002.1",
+      "ModelChecks": [
+        {
+          "Check": "Linux.*armv5tejl",
+          "Regex": "",
+          "ModelFixed": "AirFiber",
+          "VersionSnmp": "1.3.6.1.4.1.41112.1.3.2.1.40.1",
+          "Example": "Linux 2.6.33 #1 Mon Aug 28 12:49:57 CDT 2017 armv5tejl"
+        }
+      ]
+    },
+    {
+      "Vendor": "Mikrotik",
+      "Type": "Router",
+      "ObjectOID": "1.3.6.1.4.1.14988.1",
+      "ModelChecks": [
+        {
+          "Check": "RouterOS .*",
+          "ModelRegex": "RouterOS (?<Model>\\S+)",
+          "VersionSnmp": "1.3.6.1.4.1.14988.1.1.4.4.0",
+          "Example": "RouterOS CCR1072-1G-8S+"
+        }
+      ]
+    },
+    {
+      "Vendor": "Ubiquiti",
+      "Type": "Switch",
+      "ObjectOID": "1.3.6.1.4.1.4413",
+      "ModelChecks": [
+        {
+          "Check": "EdgePoint.*Linux",
+          "Regex": "(?<Model>.*?), (?<Version>.*?), Linux",
+          "Example": "EdgePoint Switch 16-Port, 1.8.1.5145168, Linux 3.6.5-1b505fb7, 1.0.0.4813883"
+        }
+      ]
+    },
+    {
+      "Vendor": "ICT",
+      "Type": "PDU",
+      "ObjectOID": "1.3.6.1.4.1.39145.10",
+      "ModelChecks": [
+        {
+          "Check": "ICT Distribution Panel",
+          "ModelSnmp": "1.3.6.1.4.1.39145.10.1.0",
+          "VersionSnmp": "1.3.6.1.4.1.39145.10.4.0",
+          "Example": "ICT Distribution Panel"
+        }
+      ]
+    },
+    {
+      "Vendor": "Fortigate",
+      "Type": "Firewall",
+      "ObjectOID": "1.3.6.1.4.1.12356.101.1.3002",
+      "ModelChecks": [
+        {
+          "Check": ".*",
+          "ModelSnmp": "1.3.6.1.4.1.12356.1.2.0",
+          "VersionSnmp": "1.3.6.1.4.1.12356.1.3.0"
+        }
+      ]
+    },
+    {
+      "Vendor": "Cambium",
+      "Type": "Wireless PTMP",
+      "ObjectOID": "1.3.6.1.4.1.161.19.250.256",
+      "ModelChecks": [
+        {
+          "Check": "CANOPY.*",
+          "VersionRegex": "CANOPY (?<Version>\\S+) ",
+          "ModelSnmp": "1.3.6.1.4.1.161.19.3.3.1.6.0",
+          "Example": "CANOPY 15.2.1 AP"
+        }
+      ]
+    },
+    {
+      "Vendor": "Cambium",
+      "Type": "CMM5",
+      "ObjectOID": "1.3.6.1.4.1.8072.3.2.10",
+      "ModelChecks": [
+        {
+          "Check": "CMM5.*",
+          "ModelFixed": "CMM5",
+          "VersionSnmp": "1.3.6.1.4.1.25868.1.2.1.3.1.65",
+          "Example": "CMM5 Controller",
+          "Note": "Shows the Power unit Version not controller, due to lack of snmp access to controller version."
+        }
+      ]
+    },
+    {
+      "Vendor": "Cambium",
+      "Type": "Wireless PTP",
+      "ObjectOID": "1.3.6.1.4.1.17713",
+      "ModelChecks": [
+        {
+          "Check": "Cambium PTP.*",
+          "Regex": "Cambium (?<Model>.*) PTP Wireless.*Version (?<Version>\\S+)",
+          "Example": "Cambium PTP 54500 105Mbps PTP Wireless Ethernet Bridge, Version 54500-05-03"
+        },
+        {
+          "Check": "Linux.*mips",
+          "ModelFixed": "ePTP",
+          "VersionSnmp": "1.3.6.1.4.1.17713.21.1.1.1.0",
+          "Example": "Linux SXMGOYPTP-PBL 2.6.32.27 #2 Mon Aug 21 16:48:14 EEST 2017 mips"
+        }
+      ]
+    },
+    {
+      "Vendor": "EtherWan",
+      "Type": "Switch",
+      "ObjectOID": "1.3.6.1.4.1.2217.1",
+      "ModelChecks": [
+        {
+          "Check": "EtherWan.*",
+          "ModelRegex": "EtherWan (?<Model>\\S+) Switch",
+          "VersionSnmp": "1.3.6.1.4.1.2217.1.1.3.11.0",
+          "Example": "EtherWan EX96000 Switch"
+        }
+      ]
+    },
+    {
+      "Vendor": "Motorola",
+      "Type": "Switch",
+      "ObjectOID": "1.3.6.1.4.1.2736.1.1",
+      "ModelChecks": [
+        {
+          "Check": "Motorola CMM.*",
+          "Regex": "Motorola (?<Model>.*), Firmware rev: (?<Version>\\S+) ",
+          "Example": "Motorola CMM-4 14 Port Managed Switch, Firmware rev: 1.93.0 02/01/12 15:30:37"
+        }
+      ]
+    }
+  ]
+}

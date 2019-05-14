@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="config.microsoftdns.json" />
+    <None Remove="example.config.microsoftdns.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="example.config.microsoftdns.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config.microsoftdns.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.extensions.configuration" Version="2.2.0" />
+    <PackageReference Include="microsoft.extensions.Configuration.Binder" Version="2.2.0" />
+    <PackageReference Include="microsoft.extensions.Configuration.json" Version="2.2.0" />
+    <PackageReference Include="System.Management" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetworkSanityManager.Tools\NetworkSanityManager.Tools.csproj" />
+  </ItemGroup>
+
+</Project>
