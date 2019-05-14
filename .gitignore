@@ -350,3 +350,4 @@ MigrationBackup/
 **/obj
 *.csv
 **/config.*.json
+**/config.json
