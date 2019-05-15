@@ -29,7 +29,7 @@ namespace NetworkSanityManager
             var pluginBlocked = false;
             if (_config.Settings.Plugins.Contains("microsoftdns"))
             {
-                // Pass only devices that have a correct sysname and have either a dns or ptr incorrect.
+                Console.WriteLine("MicrosoftDNS:");
                 var msdns = new MicrosoftDNS.Plugin(
                     DeviceResults
                     .Where((dev) => dev.SysNameValid && (dev.PtrCheck == false || dev.DnsCheck == false))
@@ -57,14 +57,16 @@ namespace NetworkSanityManager
 
             if (_config.Settings.Plugins.Contains("librenms") && !pluginBlocked)
             {
+                Console.WriteLine("LibreNMS:");
                 var libre = new LibreNMS.Plugin(
                     DeviceResults
                     .Where((dev) => dev.SysNameValid)
                     .Select<Device, LibreNMS.LibreNMSInputModel>((dev) =>
                      new LibreNMS.LibreNMSInputModel
                      {
-                         hostname = $"{dev.Name}.{_config.Settings.DomainName}",
-                         community = dev.Community
+                         Hostname = $"{dev.Name}.{_config.Settings.DomainName}",
+                         Community = dev.Community,
+                         SnmpVersion = dev.SnmpVersion
                      }
                     ));
 

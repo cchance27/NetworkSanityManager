@@ -34,7 +34,7 @@ namespace NetworkSanityManager.LibreNMS
         private bool CheckAPIDevIsNew(LibreNMSInputModel dev)
         {
             // poll api return devices that are missing data so are obviously not present
-            var url = $"{_config.Settings.url}devices/{dev.hostname}";
+            var url = $"{_config.Settings.url}devices/{dev.Hostname}";
             return _httpClient.GetStringAsync(url).GetAwaiter().GetResult().Contains("sysObjectID") == false;
         }
 
@@ -45,7 +45,7 @@ namespace NetworkSanityManager.LibreNMS
                 var sb = new StringBuilder();
                 foreach(var dev in _devices)
                 {
-                    sb.AppendLine($"{dev.hostname}");
+                    sb.AppendLine($"{dev.Hostname}");
                 }
                 return sb.ToString();
             }
@@ -60,12 +60,12 @@ namespace NetworkSanityManager.LibreNMS
                 var sb = new StringBuilder();
                 foreach (var dev in _devices)
                 {
-                    var content = new StringContent("{\"hostname\":\"" + dev.hostname + "\", \"community\": \"" + dev.community + "\", \"version\": \"v2c\"}");
+                    var content = new StringContent("{\"hostname\":\"" + dev.Hostname + "\", \"community\": \"" + dev.Community + "\", \"version\": \"" + dev.GetVersionString() + "\"}");
 
                     var post = _httpClient.PostAsync(url, content).GetAwaiter().GetResult();
                     var resp = post.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     var result = JsonConvert.DeserializeObject<LibreAPIAddResponse>(resp);
-                    sb.AppendLine(dev.hostname + ": " + result.message);
+                    sb.AppendLine(dev.Hostname + ": " + result.message);
                 }
                 return sb.ToString();
             }

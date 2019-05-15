@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using Csv;
+using SnmpSharpNet;
 
 namespace NetworkSanityManager
 {
@@ -44,9 +45,11 @@ namespace NetworkSanityManager
         private DeviceType _deviceType { get; set; }
         public string Community { get; }
 
+        public int SnmpVersion { get; }
+
         public Device() { }
 
-        public Device(string ipAddress, string sysVersion, string objectOID, string contact, string name, string location, string community)
+        public Device(string ipAddress, string sysVersion, string objectOID, string contact, string name, string location, string community, SnmpVersion snmpVersion)
         {
             var _config = Program._config;
 
@@ -57,6 +60,7 @@ namespace NetworkSanityManager
             Name = name.ToLower();
             Location = location;
             Community = community;
+            SnmpVersion = (int)snmpVersion == 3 ? (int)snmpVersion : (int)snmpVersion + 1; // SnmpAgent is enum of 0,1,3 when should be clean 1,2,3.
 
             // Find and store what kind of device this is so we can use it later.
             _deviceType = _config.DeviceTypes.SingleOrDefault<DeviceType>(dt => ObjectOID.Contains(dt.ObjectOID));

@@ -121,7 +121,8 @@ namespace NetworkSanityManager
                   collection[2]?.Value.ToString().Trim(),
                   collection[3]?.Value.ToString().Trim(),
                   collection[4]?.Value.ToString().Trim(), 
-                  snmpParameters.Community.ToString()
+                  snmpParameters.Community.ToString(),
+                  snmpParameters.Version
                 );
 
                 return resultObj;
