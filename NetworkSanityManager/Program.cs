@@ -96,7 +96,7 @@ namespace NetworkSanityManager
                     .Select<Device, Oxidized.OxidizedInputModel>((dev) =>
                         new Oxidized.OxidizedInputModel
                         {
-                            Name = $"{dev.Name}.{_config.Settings.DomainName}",
+                            Name = dev.Name,
                             Address = dev.IpAddress.ToString(),
                             Vendor = dev.Vendor,
                             Model = dev.Model
