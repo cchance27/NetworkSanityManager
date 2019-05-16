@@ -27,5 +27,6 @@ namespace NetworkSanityManager.LibreNMS
         public bool Enabled { get; set; } = false;
         public string url { get; set; }
         public string key { get; set; }
+        public int threads { get; set; } = 1;
     }
 }

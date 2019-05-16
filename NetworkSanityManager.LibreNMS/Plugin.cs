@@ -19,17 +19,20 @@ namespace NetworkSanityManager.LibreNMS
         public Plugin(IEnumerable<LibreNMSInputModel> devices)
         {
             _config = new Configuration();
-            _allDevices = devices;
-            _httpClient = new HttpClient();
-            _httpClient.DefaultRequestHeaders.Add("X-Auth-Token", _config.Settings.key);
-
             if (_config.Settings.Enabled)
             {
+                _allDevices = devices;
+                _httpClient = new HttpClient();
+                _httpClient.DefaultRequestHeaders.Add("X-Auth-Token", _config.Settings.key);
+
+                Console.WriteLine("LibreNMS Plugin Started... ");
+
+                Console.WriteLine("Calling API for Each Device to check if it needs to be added.");
                 _devices = CheckAPIForMissingDevices();
             }
         }
 
-        private IEnumerable<LibreNMSInputModel> CheckAPIForMissingDevices() => _allDevices.AsParallel().WithDegreeOfParallelism(4).Where(CheckAPIDevIsNew).ToArray();
+        private IEnumerable<LibreNMSInputModel> CheckAPIForMissingDevices() => _allDevices.AsParallel().WithDegreeOfParallelism(_config.Settings.threads).Where(CheckAPIDevIsNew).ToArray();
 
         private bool CheckAPIDevIsNew(LibreNMSInputModel dev)
         {
@@ -43,13 +46,16 @@ namespace NetworkSanityManager.LibreNMS
             if (_config.Settings.Enabled)
             {
                 var sb = new StringBuilder();
-                foreach(var dev in _devices)
+                foreach (var dev in _devices)
                 {
                     sb.AppendLine($"{dev.Hostname}");
                 }
                 return sb.ToString();
             }
-            return null;
+            else
+            {
+                return "Plugin is disabled";
+            }
         }
 
         public string Commit()
@@ -69,7 +75,10 @@ namespace NetworkSanityManager.LibreNMS
                 }
                 return sb.ToString();
             }
-            return null;
+            else
+            {
+                return "Plugin is disabled";
+            }
         }
     }
 }
