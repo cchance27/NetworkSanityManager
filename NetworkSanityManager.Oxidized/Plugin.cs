@@ -65,7 +65,7 @@ namespace NetworkSanityManager.Oxidized
                     if (actualDeviceType != null)
                     {
                         // We have a deviceType 
-                        var name = device.Name.ToUpper().Trim();
+                        var name = device.Name.ToLower().Trim();
                         var address = device.Address.Trim();
                         _output.AppendLine($"{name}:{address}:{actualDeviceType.Type}:{actualDeviceType.Username}:{actualDeviceType.Password}");
                     } 
