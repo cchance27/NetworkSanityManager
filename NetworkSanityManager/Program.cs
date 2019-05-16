@@ -7,30 +7,51 @@ namespace NetworkSanityManager
     class Program
     {
         public static Configuration _config;
+        //TODO: Add override to config to "wait for keypress on each plugin step, for debugging, or maybe when debug = true"
+        //TODO: Autoloading plugins, plugins do the cleanup of DeviceResults?
+        //TODO: Plugins need priority (so for instance we can have DNS always run first)
+        //TODO: Plugins can be alerted if theirs a "plugin block" from a previous plugin, and if they care they can abort running.
+        //TODO: Implement logging properly
 
         static void Main(string[] args)
         {
             _config = new Configuration();
             Console.WriteLine($"Threads for Processing: {_config.Settings.Threads}");
             Console.WriteLine($"Domain Name: {_config.Settings.DomainName}");
+
+            // Convert Subnets to List of IPs
+            var IPList = IPTools.SubnetsToIPAddresses(_config.Settings.Subnets);
+            Console.WriteLine($"Total IPs for Processing: {IPList.Count}");
             Console.WriteLine();
 
-            IPAddressValue[] ActiveIPs = IPTools.BuildActiveIPList();
-
-            Console.WriteLine();
+            // Build a list based on subnet and return a list of IPs responding to pings.
+            IPAddressValue[] ActiveIPs;
+            using (var progress = new ProgressBar())
+            {
+                Console.WriteLine("Testing for Active IPs... ");
+                 ActiveIPs = IPTools.BuildActiveIPList(IPList, _config.Settings.Threads, progress);
+                
+            };
             Console.WriteLine($"Total Active IPs Found: {ActiveIPs.Count()}");
             Console.WriteLine();
 
-            var snmp = new SnmpTools(_config);
-            Device[] DeviceResults = snmp.GetSnmpDevicesParallel(ActiveIPs);
+            // Run our SNMP Fetches against all known active IPs
+            Device[] DeviceResults;
+            using (var progress = new ProgressBar())
+            {
+                Console.WriteLine("Checking SNMP for Active IPs... ");
+                var snmp = new SnmpTools(_config);
+                DeviceResults = snmp.GetSnmpDevicesParallel(ActiveIPs, progress);
+            }
+            Console.WriteLine($"Total valid SNMP Responses: {DeviceResults.Where(r => String.IsNullOrWhiteSpace(r.Errors)).ToArray<Device>().Count()}");
+            Console.WriteLine();
 
+            // Save our results to static files (CSV)
+            Console.WriteLine("Saving Results of Scan");
             ResultStorage.SaveResults(DeviceResults);
-            //TODO: Add override to config to "wait for keypress on each plugin step, for debugging, or maybe when debug = true"
-            //TODO: Autoloading plugins, plugins do the cleanup of DeviceResults?
-            //TODO: Plugins need priority (so for instance we can have DNS always run first)
-            //TODO: Plugins can be alerted if theirs a "plugin block" from a previous plugin, and if they care they can abort running.
-            //TODO: Implement logging properly
+            Console.WriteLine();
 
+            Console.WriteLine("Running Plugins");
             var pluginBlocked = false;
             if (_config.Settings.Plugins.Contains("microsoftdns"))
             {

@@ -22,12 +22,16 @@ namespace NetworkSanityManager
         /// Take a List of IP's and Parallel poll all of them to get their Device Details.
         /// </summary>
         /// <param name="ActiveIPs"></param>
-        public Device[] GetSnmpDevicesParallel(IPAddressValue[] ActiveIPs) {
+        public Device[] GetSnmpDevicesParallel(IPAddressValue[] ActiveIPs, ProgressBar progress = null)
+        {
             ConcurrentBag<Device> ResultBag = new ConcurrentBag<Device>();
 
             Parallel.ForEach(
                ActiveIPs, new ParallelOptions { MaxDegreeOfParallelism = config.Settings.Threads },
-               ip => ResultBag.Add(pollDeviceFromSnmpWithFallback(ip))
+               ip => {
+                   ResultBag.Add(pollDeviceFromSnmpWithFallback(ip));
+                   if (progress != null) progress.Report((double)ResultBag.Count / ActiveIPs.Length);
+               }
             );
 
             return ResultBag.ToArray<Device>();
@@ -129,7 +133,7 @@ namespace NetworkSanityManager
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{ipAddress}: Error Fetching SNMP ({e.Message})");
+                //Console.WriteLine($"{ipAddress}: Error Fetching SNMP ({e.Message})");
                 return new Device() { IpAddress = ipAddress, Errors = e.Message };
             }
         }

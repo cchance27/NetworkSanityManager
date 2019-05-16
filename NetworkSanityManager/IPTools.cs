@@ -8,27 +8,23 @@ using System.Threading.Tasks;
 
 namespace NetworkSanityManager
 {
-    internal static class IPTools
+    public static class IPTools
     {
-        private static Configuration _config;
-
-        internal static IPAddressValue[] BuildActiveIPList()
+        public static IPAddressValue[] BuildActiveIPList(List<IPAddressValue> IPList, int threads, ProgressBar progress = null)
         {
-            _config = Program._config;
-
-            var IPList = SubnetsToIPAddresses(_config.Settings.Subnets);
-            Console.WriteLine($"Total IPs for Processing: {IPList.Count}");
-            
             var ResultBag = new System.Collections.Concurrent.ConcurrentBag<IPAddressValue>();
             Parallel.ForEach(
-               IPList, new ParallelOptions { MaxDegreeOfParallelism = _config.Settings.Threads },
-                   ip => ResultBag.Add(CheckIP(ip))
+               IPList, new ParallelOptions { MaxDegreeOfParallelism = threads },
+                   ip => {
+                       ResultBag.Add(CheckIP(ip));
+                       if (progress != null) progress.Report((double)ResultBag.Count / IPList.Count);
+                   }
             );
 
             return ResultBag.Where(ip => ip != null).ToArray<IPAddressValue>();
         }
                
-        private static List<IPAddressValue> SubnetsToIPAddresses(SubnetValue[] subnets)
+        public static List<IPAddressValue> SubnetsToIPAddresses(SubnetValue[] subnets)
         {
             List<IPAddressValue> IPList = new List<IPAddressValue>();
             foreach (SubnetValue subnet in subnets)
@@ -56,13 +52,13 @@ namespace NetworkSanityManager
                 var result = ping.Send(ipv.IPAddress, 500);
                 if (result.Status == IPStatus.Success)
                 {
-                    Console.WriteLine($"Pinging {ipv.IPAddress}... Success");
+                    //Console.WriteLine($"Pinging {ipv.IPAddress}... Success");
                     retry = 9999;
                     return ipv;
                 }
                 else
                 {
-                    Console.WriteLine($"Pinging {ipv.IPAddress}... Failed (Retry# {retry})");
+                    //Console.WriteLine($"Pinging {ipv.IPAddress}... Failed (Retry# {retry})");
                     System.Threading.Thread.Sleep(1000);
                     retry++;
                 }
