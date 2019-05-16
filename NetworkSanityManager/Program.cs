@@ -25,6 +25,11 @@ namespace NetworkSanityManager
             Device[] DeviceResults = snmp.GetSnmpDevicesParallel(ActiveIPs);
 
             ResultStorage.SaveResults(DeviceResults);
+            //TODO: Add override to config to "wait for keypress on each plugin step, for debugging, or maybe when debug = true"
+            //TODO: Autoloading plugins, plugins do the cleanup of DeviceResults?
+            //TODO: Plugins need priority (so for instance we can have DNS always run first)
+            //TODO: Plugins can be alerted if theirs a "plugin block" from a previous plugin, and if they care they can abort running.
+            //TODO: Implement logging properly
 
             var pluginBlocked = false;
             if (_config.Settings.Plugins.Contains("microsoftdns"))
@@ -52,12 +57,14 @@ namespace NetworkSanityManager
                 {
                     Console.WriteLine("Blocking all Plugins future Plugins due to DNS Update Pending.");
                     pluginBlocked = true;
+                    Console.WriteLine("\nPress Key to Continue...");
+                    Console.ReadKey();
                 }
             }
 
             if (_config.Settings.Plugins.Contains("librenms") && !pluginBlocked)
             {
-                Console.WriteLine("LibreNMS:");
+                Console.WriteLine("\nLibreNMS:");
                 var libre = new LibreNMS.Plugin(
                     DeviceResults
                     .Where((dev) => dev.SysNameValid)
@@ -72,10 +79,13 @@ namespace NetworkSanityManager
 
                 Console.WriteLine("LibreNMS Preview:");
                 Console.WriteLine(libre.Preview());
-
-                Console.ReadLine();
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
                 Console.WriteLine("LibreNMS Commit: ");
                 Console.WriteLine("\n" + libre.Commit());
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
+
             }
 
             if (_config.Settings.Plugins.Contains("oxidized") && !pluginBlocked)
@@ -92,12 +102,14 @@ namespace NetworkSanityManager
                             Model = dev.Model
                         }));
 
-                Console.WriteLine("Oxidized Preview: ");
+                Console.WriteLine("\nOxidized Preview: ");
                 Console.WriteLine(oxi.Preview());
-
-                Console.ReadLine();
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
                 Console.WriteLine("Oxidized Commit: ");
                 Console.WriteLine("\n" + oxi.Commit());
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
             }
 
             if (_config.Settings.Plugins.Contains("prometheus") && !pluginBlocked)
@@ -110,13 +122,13 @@ namespace NetworkSanityManager
 
                 Console.WriteLine("Prometheus Preview: ");
                 Console.WriteLine(prom.Preview());
-
-                Console.ReadLine();
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
                 Console.WriteLine("Prometheus Commit: ");
                 Console.WriteLine("\n" + prom.Commit());
+                Console.WriteLine("\nPress Key to Continue...");
+                Console.ReadKey();
             }
-
-            Console.ReadKey();
         }
     }
 }
